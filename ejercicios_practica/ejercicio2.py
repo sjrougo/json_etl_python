@@ -12,6 +12,25 @@ import requests
 
 import matplotlib.pyplot as plt
 
+def funcion_json (url):
+    lista_usuarios = []
+    lista_titles = []
+    n = 0
+    response = requests.get(url)
+    data = response.json()
+
+    for k in range(1, 11):
+        for user in data:
+            if user['userId'] == k:
+                if user['completed'] == True:
+                    n += 1
+            if user['userId'] not in lista_usuarios:
+                lista_usuarios.append(user['userId'])
+        lista_titles.append(n)
+        n = 0
+
+    return (lista_usuarios, lista_titles)
+
 
 if __name__ == '__main__':
     print("Bienvenidos a otra clase de Inove con Python")
@@ -45,5 +64,22 @@ if __name__ == '__main__':
     # para imprimir cuantos títulos completó cada usuario
     # y verifique si los primeros usuarios (mirando la página a ojo)
     # los datos recolectados son correctos.
+    usuarios, titulos = funcion_json(url)
 
+    fig = plt.figure()
+    fig.suptitle('Lectura de latín', fontsize=16)
+    fig.set_facecolor('whitesmoke')
+    ax = fig.add_subplot()
+
+    ax.bar(usuarios, titulos)
+    ax.set_facecolor('lightgreen')
+    ax.set_ylabel('Títulos leídos')
+    ax.set_xlabel('Usuarios')
+    ax.set_xticks(range(1, 11, 1))
+    ax.set_yticks(range(1, 15, 1))
+    
+    ax.legend()
+    ax.grid()
+    plt.show()
+   
     print("terminamos")
