@@ -1,0 +1,15 @@
+{
+    "nombre": "Juan",
+    "apellido": "Perez",
+    "dni": "12.345.678",
+    "prendas": [
+        {
+            "prenda1": "zapatillas",
+            "cantidad": 4
+        },
+        {
+            "prenda2": "remeras",
+            "cantidad": 12
+        }
+    ]
+}
